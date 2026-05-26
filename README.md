@@ -3,7 +3,7 @@
 LOGIN=XXXX
 PASSWORD=XXXX
 STREAMERS=streamer1,streamer2
-JSON_AUTH=[{'name': 'auth-token', 'value': 'xxxxxx'}, {'name': 'persistent', 'value': 'xxxxx'}]
+JSON_AUTH=[{'name': 'auth-token', 'value': 'YOUR_VALUE_HERE'}, {'name': 'persistent', 'value': 'YOUR_VALUE_HERE'}]
 ```
 
 ### JS CODE FOR GETTING VALUES
