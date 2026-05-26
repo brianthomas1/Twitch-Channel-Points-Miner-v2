@@ -14,7 +14,7 @@ function getCookie(name) {
 }
 console.log(getCookie('auth-token')); // auth-token
 const decoded = decodeURIComponent(getCookie('twilight-user'));
-console.log(JSON.parse(decoded).id); // persistent
+console.log(JSON.parse(decoded).id); // persistent (twitch acc id)
 ```
 
 <h3 align="center">https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2</h3>
