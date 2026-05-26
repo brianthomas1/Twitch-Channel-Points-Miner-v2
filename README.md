@@ -1,5 +1,5 @@
 
-**WITH .ENV ONLY**
+**WORKS ONLY WITH `.ENV` FILE**
 ```angular2html
 LOGIN=XXXX
 PASSWORD=XXXX
@@ -8,7 +8,7 @@ JSON_AUTH=[{'name': 'auth-token', 'value': 'xxxxxx'}, {'name': 'persistent', 'va
 
 ```
 
-<h1 align="center">https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2</h1>
+<h3 align="center">https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2</h3>
 
 **Credits**
 - Main idea: https://github.com/gottagofaster236/Twitch-Channel-Points-Miner
