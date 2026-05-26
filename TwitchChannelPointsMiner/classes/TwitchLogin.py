@@ -5,8 +5,13 @@
 import copy
 # import getpass
 import logging
-import os
 import pickle
+
+import ast
+import os
+from dotenv import load_dotenv, dotenv_values
+
+load_dotenv()
 
 # import webbrowser
 # import browser_cookie3
@@ -324,10 +329,7 @@ class TwitchLogin(object):
         return None
 
     def load_cookies(self, cookies_file):
-        if os.path.isfile(cookies_file):
-            self.cookies = pickle.load(open(cookies_file, "rb"))
-        else:
-            raise WrongCookiesException("There must be a cookies file!")
+        self.cookies = ast.literal_eval(os.getenv("JSON_AUTH"))
 
     def get_user_id(self):
         persistent = self.get_cookie_value("persistent")
