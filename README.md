@@ -1,10 +1,20 @@
-
-**WORKS ONLY WITH `.ENV` FILE**
+#### WORKS ONLY WITH `.ENV` FILE
 ```angular2html
 LOGIN=XXXX
 PASSWORD=XXXX
 STREAMERS=streamer1,streamer2
 JSON_AUTH=[{'name': 'auth-token', 'value': 'xxxxxx'}, {'name': 'persistent', 'value': 'xxxxx'}]
+```
+
+### JS CODE FOR GETTING VALUES
+```JS
+function getCookie(name) {
+  let cookie = document.cookie.split('; ').find(row => row.startsWith(name + '='));
+  return cookie ? cookie.split('=')[1] : null;
+}
+console.log(getCookie('auth-token')); // auth-token
+const decoded = decodeURIComponent(getCookie('twilight-user'));
+console.log(JSON.parse(decoded).id); // persistent
 ```
 
 <h3 align="center">https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2</h3>
