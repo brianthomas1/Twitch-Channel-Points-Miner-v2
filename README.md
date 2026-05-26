@@ -5,7 +5,6 @@ LOGIN=XXXX
 PASSWORD=XXXX
 STREAMERS=streamer1,streamer2
 JSON_AUTH=[{'name': 'auth-token', 'value': 'xxxxxx'}, {'name': 'persistent', 'value': 'xxxxx'}]
-
 ```
 
 <h3 align="center">https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2</h3>
