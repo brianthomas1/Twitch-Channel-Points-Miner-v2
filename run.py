@@ -22,7 +22,7 @@ load_dotenv()
 login_acc = os.getenv("LOGIN")
 password_acc = os.getenv("PASSWORD")
 
-streamer1 = os.getenv("STREAMER")
+streamers_array = os.getenv("STREAMERS").split(',')
 
 
 acc = TwitchChannelPointsMiner(
@@ -72,7 +72,7 @@ acc = TwitchChannelPointsMiner(
 
 acc.mine(
     [
-        Streamer(streamer1)
+        Streamer(el) for el in streamers_array
     ],
     followers=False,
     followers_order=FollowersOrder.ASC
