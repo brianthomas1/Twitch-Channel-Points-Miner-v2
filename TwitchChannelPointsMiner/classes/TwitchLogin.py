@@ -9,9 +9,7 @@ import pickle
 
 import ast
 import os
-from dotenv import load_dotenv, dotenv_values
 
-load_dotenv()
 
 # import webbrowser
 # import browser_cookie3
@@ -26,6 +24,9 @@ from TwitchChannelPointsMiner.constants import CLIENT_ID, GQLOperations, USER_AG
 
 from datetime import datetime, timedelta, timezone
 from time import sleep
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -304,23 +305,6 @@ class TwitchLogin(object):
         self.login_check_result = self.__set_user_id()
         return self.login_check_result
 
-    def save_cookies(self, cookies_file):
-        logger.info("Saving cookies to your computer..")
-        cookies_dict = self.session.cookies.get_dict()
-        # print(f"cookies_dict2pickle: {cookies_dict}")
-        cookies_dict["auth-token"] = self.token
-        if "persistent" not in cookies_dict:  # saving user id cookies
-            cookies_dict["persistent"] = self.user_id
-
-        # old way saves only 'auth-token' and 'persistent'
-        self.cookies = []
-        # cookies_dict = self.shared_cookies
-        # print(f"cookies_dict2pickle: {cookies_dict}")
-        for cookie_name, value in cookies_dict.items():
-            self.cookies.append({"name": cookie_name, "value": value})
-        # print(f"cookies2pickle: {self.cookies}")
-        pickle.dump(self.cookies, open(cookies_file, "wb"))
-
     def get_cookie_value(self, key):
         for cookie in self.cookies:
             if cookie["name"] == key:
@@ -328,8 +312,8 @@ class TwitchLogin(object):
                     return cookie["value"]
         return None
 
-    def load_cookies(self, cookies_file):
-        self.cookies = ast.literal_eval(os.getenv("JSON_AUTH"))
+    def load_cookies(self):
+        self.cookies = ast.literal_eval(os.getenv("COOKIES"))
 
     def get_user_id(self):
         persistent = self.get_cookie_value("persistent")
