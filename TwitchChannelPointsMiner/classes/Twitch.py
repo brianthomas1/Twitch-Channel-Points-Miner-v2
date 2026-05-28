@@ -53,8 +53,7 @@ JsonType = Dict[str, Any]
 
 
 class Twitch(object):
-    __slots__ = [
-        "cookies_file",
+    __slots__ = (
         "user_agent",
         "twitch_login",
         "running",
@@ -64,13 +63,9 @@ class Twitch(object):
         "client_session",
         "client_version",
         "twilight_build_id_pattern",
-    ]
+    )
 
     def __init__(self, username, user_agent, password=None):
-        cookies_path = os.path.join(Path().absolute(), "cookies")
-        Path(cookies_path).mkdir(parents=True, exist_ok=True)
-        # self.cookies_file = os.path.join(cookies_path, f"{username}.pkl")
-        self.cookies_file = ""
         self.user_agent = user_agent
         self.device_id = "".join(
             choice(string.ascii_letters + string.digits) for _ in range(32)
@@ -88,14 +83,7 @@ class Twitch(object):
         )
 
     def login(self):
-        # if not os.path.isfile(self.cookies_file):
-        #     if self.twitch_login.login_flow():
-        #         self.twitch_login.save_cookies(self.cookies_file)
-        # else:
-        #     self.twitch_login.load_cookies(self.cookies_file)
-        #     self.twitch_login.set_token(self.twitch_login.get_auth_token())
-
-        self.twitch_login.load_cookies(self.cookies_file)
+        self.twitch_login.load_cookies()
         self.twitch_login.set_token(self.twitch_login.get_auth_token())
 
     # === STREAMER / STREAM / INFO === #
