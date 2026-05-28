@@ -434,7 +434,7 @@ class WebSocketsPool:
             if "ERR_BADAUTH" in error_message:
                 # Inform the user about the potential outdated cookie file
                 username = ws.twitch.twitch_login.username
-                logger.error(f"Received the ERR_BADAUTH error, most likely you have an outdated cookie file \"cookies\\{username}.pkl\". Delete this file and try again.")
+                logger.error(f"Received the ERR_BADAUTH error, most likely you have an outdated cookie. Replace the COOKIES value with the current one in the environment variables file (.env)")
                 # Attempt to delete the outdated cookie file
                 # try:
                 #     cookie_file_path = os.path.join("cookies", f"{username}.pkl")
