@@ -15,7 +15,7 @@ from TwitchChannelPointsMiner.classes.entities.Bet import Strategy, BetSettings,
 from TwitchChannelPointsMiner.classes.entities.Streamer import Streamer, StreamerSettings
 
 import os
-from dotenv import load_dotenv, dotenv_values 
+from dotenv import load_dotenv
 
 load_dotenv() 
 
@@ -23,7 +23,6 @@ login_acc = os.getenv("LOGIN")
 password_acc = os.getenv("PASSWORD")
 
 streamers_array = os.getenv("STREAMERS").split(',')
-
 
 acc = TwitchChannelPointsMiner(
     username=login_acc,
