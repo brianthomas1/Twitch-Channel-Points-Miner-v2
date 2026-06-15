@@ -4,6 +4,9 @@ LOGIN=XXXX
 PASSWORD=XXXX
 STREAMERS=streamer1,streamer2
 COOKIES=[{'name': 'auth-token', 'value': 'YOUR_VALUE_HERE'}, {'name': 'persistent', 'value': 'YOUR_VALUE_HERE'}]
+
+DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/xxx/xxx"
+EVENTS_FOR_NOTIFY=STREAMER_ONLINE,STREAMER_OFFLINE
 ```
 
 ### JS CODE FOR GETTING VALUES
@@ -17,7 +20,7 @@ const decoded = decodeURIComponent(getCookie('twilight-user'));
 console.log(JSON.parse(decoded).id); // persistent (twitch acc id)
 ```
 
-<h3 align="center">https://github.com/rdavydov/Twitch-Channel-Points-Miner-v2</h3>
+<h3 align="center">https://github.com/brianthomas1/Twitch-Channel-Points-Miner-v2/tree/master</h3>
 
 **Credits**
 - Main idea: https://github.com/gottagofaster236/Twitch-Channel-Points-Miner
