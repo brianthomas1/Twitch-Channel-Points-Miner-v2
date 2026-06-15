@@ -1,9 +1,9 @@
 ### WORKS ONLY WITH `.ENV` FILE
-```
+```properties
 LOGIN=XXXX
 PASSWORD=XXXX
 STREAMERS=streamer1,streamer2
-COOKIES=[{'name': 'auth-token', 'value': 'YOUR_VALUE_HERE'}, {'name': 'persistent', 'value': 'YOUR_VALUE_HERE'}]
+COOKIES="[{'name': 'auth-token', 'value': 'YOUR_VALUE_HERE'}, {'name': 'persistent', 'value': 'YOUR_VALUE_HERE'}]"
 
 DISCORD_WEBHOOK_URL="https://discord.com/api/webhooks/xxx/xxx"
 EVENTS_FOR_NOTIFY=STREAMER_ONLINE,STREAMER_OFFLINE
