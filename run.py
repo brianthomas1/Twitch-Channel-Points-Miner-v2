@@ -24,6 +24,26 @@ password_acc = os.getenv("PASSWORD")
 
 streamers_array = os.getenv("STREAMERS").split(',')
 
+discord_notify = os.getenv("DISCORD_WEBHOOK_URL")
+
+if discord_notify != "" or discord_notify is not None:
+    events_for_notify = os.getenv("EVENTS_FOR_NOTIFY", "STREAMER_ONLINE,STREAMER_OFFLINE").split(',')
+    if events_for_notify[0] == "":
+        events_for_notify = ["STREAMER_ONLINE","STREAMER_OFFLINE"]
+    
+    events_array_for_notify = [
+        getattr(Events, ev)
+        for ev in events_for_notify
+        if hasattr(Events, ev)
+    ]
+
+    discord_notify = Discord(
+        webhook_api=discord_notify,
+        events=events_array_for_notify
+    )
+else:
+    discord_notify = None
+
 acc = TwitchChannelPointsMiner(
     username=login_acc,
     password=password_acc,
@@ -51,7 +71,7 @@ acc = TwitchChannelPointsMiner(
             BET_wiN=Fore.MAGENTA                # Color allowed are: [BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET].
         ),
         telegram=None,
-        discord=None,
+        discord=discord_notify,
         webhook=None,
         matrix=None,
         pushover=None,
@@ -60,7 +80,7 @@ acc = TwitchChannelPointsMiner(
     streamer_settings=StreamerSettings(
         make_predictions=False,                  # If you want to Bet / Make prediction
         follow_raid=True,                       # Follow raid to obtain more points
-        claim_drops=True,                       # We can't filter rewards base on stream. Set to False for skip viewing counter increase and you will never obtain a drop reward from this script. Issue #21
+        claim_drops=False,                       # We can't filter rewards base on stream. Set to False for skip viewing counter increase and you will never obtain a drop reward from this script. Issue #21
         claim_moments=False,                     # If set to True, https://help.twitch.tv/s/article/moments will be claimed when available
         watch_streak=True,                      # If a streamer go online change the priority of streamers array and catch the watch screak. Issue #11
         community_goals=False,                  # If True, contributes the max channel points per stream to the streamers' community challenge goals
