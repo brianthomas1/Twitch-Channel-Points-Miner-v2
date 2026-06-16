@@ -19,30 +19,49 @@ from dotenv import load_dotenv
 
 load_dotenv() 
 
+def str_to_attr(str_array: list) -> list:
+    return [getattr(Events, ev) for ev in str_array if hasattr(Events, ev)]
+
 login_acc = os.getenv("LOGIN")
 password_acc = os.getenv("PASSWORD")
 
 streamers_array = os.getenv("STREAMERS").split(',')
 
-discord_notify = os.getenv("DISCORD_WEBHOOK_URL")
+# Discord notifications
+discord_notify = os.getenv("DISCORD_WEBHOOK_URL", "")
+if discord_notify != "":
+    events_for_notify_ds = os.getenv("EVENTS_FOR_NOTIFY_DS", "").split(',')
 
-if discord_notify != "" and discord_notify is not None:
-    events_for_notify = os.getenv("EVENTS_FOR_NOTIFY", "").split(',')
-    if events_for_notify[0] == "":
-        events_for_notify = ["STREAMER_ONLINE","STREAMER_OFFLINE"]
+    if events_for_notify_ds[0] == "":
+        events_for_notify_ds = ["STREAMER_ONLINE","STREAMER_OFFLINE"]
     
-    events_array_for_notify = [
-        getattr(Events, ev)
-        for ev in events_for_notify
-        if hasattr(Events, ev)
-    ]
+    events_arr_for_notify_ds = str_to_attr(events_for_notify_ds)
 
     discord_notify = Discord(
         webhook_api=discord_notify,
-        events=events_array_for_notify
+        events=events_arr_for_notify_ds
     )
 else:
     discord_notify = None
+
+# Telegram notifications
+tg_chat_id = os.getenv("TG_CHAT_ID", "") # Chat ID to send messages @getmyid_bot
+tg_bot_api_token = os.getenv("TG_BOT_API_TOKEN", "") # Telegram API token @BotFather
+tg_notify = None
+if tg_bot_api_token != "" and tg_chat_id != "":
+    events_for_notify_tg = os.getenv("EVENTS_FOR_NOTIFY_TG", "").split(',')
+
+    if events_for_notify_tg[0] == "":
+        events_for_notify_tg = ["STREAMER_ONLINE", "STREAMER_OFFLINE"]
+
+    events_array_for_notify_tg = str_to_attr(events_for_notify_tg)
+
+    tg_notify = Telegram(
+        chat_id=int(tg_chat_id),
+        token=tg_bot_api_token,
+        events=events_array_for_notify_tg
+    )
+
 
 acc = TwitchChannelPointsMiner(
     username=login_acc,
@@ -70,7 +89,7 @@ acc = TwitchChannelPointsMiner(
             streamer_offline="red",             # Read more in README.md
             BET_wiN=Fore.MAGENTA                # Color allowed are: [BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, RESET].
         ),
-        telegram=None,
+        telegram=tg_notify,
         discord=discord_notify,
         webhook=None,
         matrix=None,
