@@ -26,7 +26,7 @@ streamers_array = os.getenv("STREAMERS").split(',')
 
 discord_notify = os.getenv("DISCORD_WEBHOOK_URL")
 
-if discord_notify != "" or discord_notify is not None:
+if discord_notify != "" and discord_notify is not None:
     events_for_notify = os.getenv("EVENTS_FOR_NOTIFY", "").split(',')
     if events_for_notify[0] == "":
         events_for_notify = ["STREAMER_ONLINE","STREAMER_OFFLINE"]
